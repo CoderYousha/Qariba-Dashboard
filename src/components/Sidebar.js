@@ -31,19 +31,14 @@ function Sidebar() {
             "path": "/categories",
         },
         {
-            "title": <FormattedMessage id="products" />,
-            "icon": <LocalMallOutlinedIcon fontSize="large" className="text-yellow-500" />,
-            "path": "/products",
+            "title": <FormattedMessage id="banners" />,
+            "icon": <CampaignOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/banners",
         },
         {
             "title": <FormattedMessage id="orders" />,
             "icon": <InboxIcon fontSize="large" className="text-yellow-500" />,
             "path": "/orders",
-        },
-        {
-            "title": <FormattedMessage id="banners" />,
-            "icon": <CampaignOutlinedIcon fontSize="large" className="text-yellow-500" />,
-            "path": "/banners",
         },
     ];
 

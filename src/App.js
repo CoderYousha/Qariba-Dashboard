@@ -12,6 +12,7 @@ import AuthenticationRoutes from './routes/AuthenticationRoutes';
 import UsersRoutes from './routes/UsersRoutes';
 import Sidebar from './components/Sidebar';
 import CategoriesRoutes from './routes/CategoriesRoutes';
+import BannersRoutes from './routes/BannersRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -36,6 +37,11 @@ function App() {
               }
               {
                 CategoriesRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                BannersRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }

@@ -77,6 +77,15 @@ function Translation() {
             photography: "Photography",
             delete_category_title: "Delete Category",
             delete_category_description: "Are you sure that you want delete this category?",
+            banners: "Banners",
+            add_banner: "Add New Banner",
+            search_banner: "Search Banner",
+            title: "Title",
+            description: "Description",
+            update_banner: "Update Banner",
+            total_banners: "Total Banners",
+            delete_banner_title: "Delete Banner",
+            delete_banner_description: "Are you sure that you wnat delete this banner?",
         },
         ar: {
             procedures: "الإجراءات",
@@ -157,6 +166,15 @@ function Translation() {
             photography: "التصوير",
             delete_category_title: "حذف الصنف",
             delete_category_description: "هل أنت متأكد أنك ترغب بحذف هذا الصنف؟",
+            banners: "الإعلانات",
+            add_banner: "إضافة إعلان جديد",
+            search_banner: "البحث عن إعلان",
+            title: "العنوان",
+            description: "الوصف",
+            update_banner: "تعديل الإعلان",
+            total_banners: "إجمالي الإعلانات",
+            delete_banner_title: "حذف الإعلان",
+            delete_banner_description: "هل أنت متأكد أنك ترغب بحذف هذا الإعلان؟",
         }
     };
 }

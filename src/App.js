@@ -13,6 +13,9 @@ import UsersRoutes from './routes/UsersRoutes';
 import Sidebar from './components/Sidebar';
 import CategoriesRoutes from './routes/CategoriesRoutes';
 import BannersRoutes from './routes/BannersRoutes';
+import ContactsRoutes from './routes/ContactsRoutes';
+import AboutusRoutes from './routes/AboutusRoutes';
+import ProjectsRoutes from './routes/ProjectsRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -42,6 +45,21 @@ function App() {
               }
               {
                 BannersRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                ContactsRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                AboutusRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                ProjectsRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }

@@ -13,6 +13,9 @@ import { useConstants } from "../hooks/UseConstants";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { usePopups } from "../hooks/UsePopups";
 import LogoutPopup from "../popup/Logout";
+import AddIcCallOutlinedIcon from '@mui/icons-material/AddIcCallOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
 
 function Sidebar() {
     const { host, language } = useConstants();
@@ -31,9 +34,24 @@ function Sidebar() {
             "path": "/categories",
         },
         {
+            "title": <FormattedMessage id="projects" />,
+            "icon": <AccountTreeOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/projects",
+        },
+        {
             "title": <FormattedMessage id="banners" />,
             "icon": <CampaignOutlinedIcon fontSize="large" className="text-yellow-500" />,
             "path": "/banners",
+        },
+        {
+            "title": <FormattedMessage id="contact_us" />,
+            "icon": <AddIcCallOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/contacts",
+        },
+        {
+            "title": <FormattedMessage id="about_us" />,
+            "icon": <InfoOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/about_us",
         },
         {
             "title": <FormattedMessage id="orders" />,

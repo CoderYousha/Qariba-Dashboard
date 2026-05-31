@@ -16,6 +16,8 @@ import LogoutPopup from "../popup/Logout";
 import AddIcCallOutlinedIcon from '@mui/icons-material/AddIcCallOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
+import LayersOutlinedIcon from '@mui/icons-material/LayersOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 
 function Sidebar() {
     const { host, language } = useConstants();
@@ -30,7 +32,7 @@ function Sidebar() {
         },
         {
             "title": <FormattedMessage id="categories" />,
-            "icon": <CategoryOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "icon": <LayersOutlinedIcon fontSize="large" className="text-yellow-500" />,
             "path": "/categories",
         },
         {
@@ -52,6 +54,11 @@ function Sidebar() {
             "title": <FormattedMessage id="about_us" />,
             "icon": <InfoOutlinedIcon fontSize="large" className="text-yellow-500" />,
             "path": "/about_us",
+        },
+        {
+            "title": <FormattedMessage id="clients" />,
+            "icon": <GroupOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/clients",
         },
         {
             "title": <FormattedMessage id="orders" />,

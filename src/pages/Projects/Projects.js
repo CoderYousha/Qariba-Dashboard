@@ -20,6 +20,7 @@ import AddBanner from "../../popup/banner/AddBanner";
 import UpdateBanner from "../../popup/banner/UpdateBanner";
 import AddProject from "../../popup/project/AddProject";
 import UpdateProject from "../../popup/project/UpdateProject";
+import { useNavigate } from "react-router-dom";
 
 function Projects() {
     const { language, host } = useConstants();
@@ -35,6 +36,7 @@ function Projects() {
     const [projectsCounts, setProjectsCounts] = useState();
     const [projects, setProjects] = useState([]);
     const [project, setProject] = useState();
+    const navigate = useNavigate();
 
     {/* Get Projects Function */ }
     const getProjects = async () => {
@@ -135,8 +137,8 @@ function Projects() {
                                                                     <Box className="!flex justify-center items-center">
                                                                         <Button variant="contained" className="!ml-5 !bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300" onClick={(e) => { setProject(project); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
                                                                         <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300" onClick={(e) => { setProject(project); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
-                                                                        <Button variant="contained" className="!bg-orange-300 !font-bold !text-orange-800 hover:!bg-orange-500 hover:!text-white duration-300 !mx-2"><FormattedMessage id='images' /></Button>
-                                                                        <Button variant="contained" className="!bg-orange-300 !font-bold !text-orange-800 hover:!bg-orange-500 hover:!text-white duration-300"><FormattedMessage id='videos' /></Button>
+                                                                        <Button variant="contained" onClick={() => navigate(`${project.id}/images`)} className="!bg-orange-300 !font-bold !text-orange-800 hover:!bg-orange-500 hover:!text-white duration-300 !mx-2"><FormattedMessage id='images' /></Button>
+                                                                        <Button variant="contained" onClick={() => navigate(`${project.id}/videos`)} className="!bg-orange-300 !font-bold !text-orange-800 hover:!bg-orange-500 hover:!text-white duration-300"><FormattedMessage id='videos' /></Button>
                                                                     </Box>
                                                                 </StyledTableCell>
                                                             </StyledTableRow>

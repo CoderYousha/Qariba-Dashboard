@@ -16,12 +16,13 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Fetch from "../../services/Fetch";
 import DeleteDialog from "../../popup/DeleteDialog";
+import UpdateUserPassword from "../../popup/user/UpdateUserPassword";
 
 function Users() {
     const { language, host } = useConstants();
     const { wait } = useContext(AuthContext);
     const theme = useTheme();
-    const { getWait, setGetWait } = useWaits();
+    const { getWait, setGetWait, sendWait, setSendWait } = useWaits();
     const { setPopup } = usePopups();
     const { search, setSearch } = useSearch();
     const intl = useIntl();
@@ -57,6 +58,27 @@ function Users() {
         }
     }
 
+    {/* Export PDF Function */ }
+    const exportUsers = async () => {
+        setSendWait(true);
+
+        fetch(`${host}/api/export`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "users.pdf";
+                a.click();
+        });
+
+        setSendWait(false);
+    }
+
     useEffect(() => {
         getUsers();
     }, [page, search]);
@@ -81,8 +103,15 @@ function Users() {
                                         {/* Top Section */}
                                         <Box sx={{ backgroundColor: theme.palette.background.default }} className="flex justify-between items-center px-2">
                                             <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='users' /></Typography>
+                                            <Button variant="contained" onClick={exportUsers} className="!bg-yellow-500">
+                                                {
+                                                    sendWait ?
+                                                        <CircularProgress size={20} className="" color="white" />
+                                                        :
+                                                        <FormattedMessage id='export_users' />
+                                                }
+                                            </Button>
                                         </Box>
-
 
                                         <Box>
                                             <TableContainer className="" component={Paper} dir={language === 'en' ? 'ltr' : "rtl"}>
@@ -129,6 +158,7 @@ function Users() {
                                                                 <StyledTableCell align="right">
                                                                     <Box className="!flex justify-around items-center">
                                                                         <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300" onClick={(e) => { setUser(user); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
+                                                                        <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300 !ml-2" onClick={(e) => { setUser(user); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
                                                                     </Box>
                                                                 </StyledTableCell>
                                                             </StyledTableRow>
@@ -155,6 +185,11 @@ function Users() {
                         {/* Delete User Popup */}
                         <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                             <DeleteDialog onClickConfirm={deleteUser} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_user_title" />} subtitle={<FormattedMessage id="delete_user_description" />} />
+                        </Box>
+
+                        {/* Update Password Popup */}
+                        <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
+                            <UpdateUserPassword user={user} setSnackBar={setSnackBar} onClickCancel={() => setPopup('update', 'none')} />
                         </Box>
 
                         {/* Snackbar Alert */}

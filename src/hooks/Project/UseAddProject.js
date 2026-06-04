@@ -6,10 +6,10 @@ export function useAddProject (){
     const [coverImage, setCoverImage] = useState('');
     const [clientName, setClientName] = useState('');
     const [projectUrl, setProjectUrl] = useState('');
-    const [categoryId, setCategoryId] = useState('');
+    const [subCategoryId, setSubCategoryId] = useState('');
 
     return {
         title, setTitle, description, setDescription, coverImage, setCoverImage, clientName, setClientName,
-        projectUrl, setProjectUrl, categoryId, setCategoryId,
+        projectUrl, setProjectUrl, subCategoryId, setSubCategoryId,
     };
 }

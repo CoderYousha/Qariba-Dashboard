@@ -16,17 +16,23 @@ function AddProject({ onClickCancel, setSnackBar, setProjects }) {
     const theme = useTheme();
     const { host, language } = useConstants();
     const { sendWait, setSendWait, getWait, setGetWait } = useWaits();
-    const { title, setTitle, description, setDescription, coverImage, setCoverImage, clientName, setClientName, projectUrl, setProjectUrl, categoryId, setCategoryId } = useAddProject();
+    const { title, setTitle, description, setDescription, coverImage, setCoverImage, clientName, setClientName, projectUrl, setProjectUrl, subCategoryId, setSubCategoryId } = useAddProject();
     const [categories, setCategories] = useState([]);
-    const {search, setSearch} = useSearch();
+    const [subCategories, setSubCategories] = useState([]);
+    const [category, setCategory] = useState('');
+    const { search, setSearch } = useSearch();
 
-    const getCategories = async () => {
-        let result = await Fetch(`${host}/api/categories?search=${search}`, 'GET', null);
+    const getCategories = async (service) => {
+        let result = await Fetch(`${host}/api/categories?service=${service}`, 'GET', null);
         if (result.status === 200) {
             setCategories(result.data.data);
         }
 
         setGetWait(false);
+    }
+
+    const getSubCategories = (categoryId) => {
+        setCategory(categories.filter((category) => category.id == categoryId)[0]);
     }
 
     const addProject = async () => {
@@ -37,10 +43,10 @@ function AddProject({ onClickCancel, setSnackBar, setProjects }) {
             coverImage: coverImage,
             projectUrl: projectUrl,
             clientName: clientName,
-            categoryId: categoryId,
+            subCategoryId: subCategoryId,
         });
 
-        let result = await Fetch(`${host}/api/projects`, 'post', formData);
+        let result = await Fetch(`${host}/api/projects`, 'POST', formData);
 
         if (result.status === 201) {
             setSnackBar('success', <FormattedMessage id="added_success" />);
@@ -61,12 +67,12 @@ function AddProject({ onClickCancel, setSnackBar, setProjects }) {
         setCoverImage('');
         setClientName('');
         setProjectUrl('');
-        setCategoryId('');
+        setSubCategoryId('');
     }
 
-    useEffect(() => {
-        getCategories();
-    }, []);
+    // useEffect(() => {
+    //     getCategories();
+    // }, []);
 
     return (
         <Box sx={{ backgroundColor: theme.palette.background.paper }} className="shadow-lg w-3/5 h-screen rounded-3xl px-4 py-5 overflow-y-scroll none-view-scroll max-sm:w-4/5 max-sm:translate-x-0 max-sm:left-0 relative max-sm:overflow-y-scroll" dir={language === 'en' ? 'ltr' : "rtl"}>
@@ -81,11 +87,29 @@ function AddProject({ onClickCancel, setSnackBar, setProjects }) {
                     <TextField multiline rows={3} variant="outlined" label={<FormattedMessage id="description" />} className="w-full !mt-5 max-sm:w-full max-sm:!mt-3" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </Box>
                 <Box className='flex flex-col justify-between mt-5 max-sm:flex-col'>
-                    <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} className="w-full py-2 outline-none rounded-md border border-gray-300 max-sm:w-full">
+                    <select onChange={(e) => getCategories(e.target.value)} className="w-full py-2 outline-none rounded-md border border-gray-300 max-sm:w-full">
+                        <option value='' disabled selected><FormattedMessage id="service" /></option>
+                        <option value="software_developer"><FormattedMessage id="software_developer" /></option>
+                        <option value="digital_marketing"><FormattedMessage id="digital_marketing" /></option>
+                        <option value="photography"><FormattedMessage id="photography" /></option>
+                    </select>
+                </Box>
+                <Box className='flex flex-col justify-between mt-5 max-sm:flex-col'>
+                    <select onChange={(e) => getSubCategories(e.target.value)} className="w-full py-2 outline-none rounded-md border border-gray-300 max-sm:w-full">
                         <option value='' disabled selected><FormattedMessage id="category" /></option>
                         {
-                            categories.map ((category, index) =>
+                            categories?.map((category, index) =>
                                 <option value={category.id} key={index}>{category.category}</option>
+                            )
+                        }
+                    </select>
+                </Box>
+                <Box className='flex flex-col justify-between mt-5 max-sm:flex-col'>
+                    <select onChange={(e) => setSubCategoryId(e.target.value)} className="w-full py-2 outline-none rounded-md border border-gray-300 max-sm:w-full">
+                        <option value='' disabled selected><FormattedMessage id="sub_category" /></option>
+                        {
+                            category?.sub_categories?.map((subCategory, index) =>
+                                <option value={subCategory.id} key={index}>{subCategory.sub_category}</option>
                             )
                         }
                     </select>

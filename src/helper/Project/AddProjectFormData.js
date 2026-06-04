@@ -4,15 +4,15 @@ export function buildAddProjectFormData({
     coverImage,
     clientName,
     projectUrl,
-    categoryId
+    subCategoryId
 }) {
     const formData = new FormData();
 
     formData.append('title', title);
     formData.append('description', description);
     formData.append('client_name', clientName);
-    formData.append('projectUrl', projectUrl);
-    formData.append('category_id', categoryId);
+    formData.append('project_url', projectUrl);
+    formData.append('sub_category_id', subCategoryId);
 
     if (coverImage)
         formData.append('cover_image', coverImage);

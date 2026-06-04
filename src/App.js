@@ -17,6 +17,9 @@ import ContactsRoutes from './routes/ContactsRoutes';
 import AboutusRoutes from './routes/AboutusRoutes';
 import ProjectsRoutes from './routes/ProjectsRoutes';
 import ClientsRoutes from './routes/ClientsRoutes';
+import OrdersRoutes from './routes/OrdersRoutes';
+import ProfileRoutes from './routes/ProfileRoutes';
+import TeamRoutes from './routes/TeamRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -66,6 +69,21 @@ function App() {
               }
               {
                 ClientsRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                OrdersRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                ProfileRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                TeamRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }

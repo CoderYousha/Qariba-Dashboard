@@ -18,6 +18,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
 import LayersOutlinedIcon from '@mui/icons-material/LayersOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import GroupWorkOutlinedIcon from '@mui/icons-material/GroupWorkOutlined';
 
 function Sidebar() {
     const { host, language } = useConstants();
@@ -59,6 +60,11 @@ function Sidebar() {
             "title": <FormattedMessage id="clients" />,
             "icon": <GroupOutlinedIcon fontSize="large" className="text-yellow-500" />,
             "path": "/clients",
+        },
+        {
+            "title": <FormattedMessage id="team" />,
+            "icon": <GroupWorkOutlinedIcon fontSize="large" className="text-yellow-500" />,
+            "path": "/team",
         },
         {
             "title": <FormattedMessage id="orders" />,

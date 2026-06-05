@@ -135,6 +135,13 @@ function Translation() {
             update_member: "Update Member",
             delete_member_title: "Delete Member",
             delete_member_description: "Are you sure that you want delete this member?",
+            models: "Models",
+            search_model: "Search Model",
+            total_models: "Total Models",
+            add_model: "Add New Model",
+            update_model: "Update Model",
+            delete_model_title: "Delete Model",
+            delete_model_description: "Are you sure that you want delete this model?",
         },
         ar: {
             procedures: "الإجراءات",
@@ -273,6 +280,13 @@ function Translation() {
             update_member: "تحديث العضو",
             delete_member_title: "حذف العضو",
             delete_member_description: "هل أنت متأكد أنك ترغب بحذف هذا العضو؟",
+            models: "العارضات",
+            search_model: "البحث عن عارضة",
+            total_models: "إجمالي العارضات",
+            add_model: "إضافة عارضة جديدة",
+            update_model: "تحديث العارضة",
+            delete_model_title: "حذف العارضة",
+            delete_model_description: "هل انت متأكد أنك ترغب بحذف هذه العارضة",
         }
     };
 }

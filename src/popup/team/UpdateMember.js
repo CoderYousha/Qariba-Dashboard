@@ -19,7 +19,7 @@ function UpdateMember({ onClickCancel, setSnackBar, getMembers, member }) {
     const { sendWait, setSendWait } = useWaits();
     const { fullName, setFullName, description, setDescription, image, setImage, position, setPosition } = useAddMember();
 
-    const updateBanner = async () => {
+    const updateModel = async () => {
         setSendWait(true);
         const formData = buildAddMemberFormData({
             fullName: fullName,
@@ -58,7 +58,7 @@ function UpdateMember({ onClickCancel, setSnackBar, getMembers, member }) {
     return (
         <Box sx={{ backgroundColor: theme.palette.background.paper }} className="shadow-lg w-3/5 h-fit rounded-3xl px-4 py-5 overflow-y-scroll none-view-scroll max-sm:w-4/5 max-sm:translate-x-0 max-sm:left-0 relative max-sm:overflow-y-scroll" dir={language === 'en' ? 'ltr' : "rtl"}>
             <Typography variant="h5" className="!font-semibold max-sm:!text-xl">
-                <FormattedMessage id='update_banner' />
+                <FormattedMessage id='update_member' />
             </Typography>
             <CloseIcon onClick={() => { resetValue(); onClickCancel(); }} className="text-gray-700 cursor-pointer absolute top-5 left-5" fontSize="large" sx={{ left: language === 'en' && '90%' }}></CloseIcon>
             <Divider className="!my-5" />
@@ -76,7 +76,7 @@ function UpdateMember({ onClickCancel, setSnackBar, getMembers, member }) {
                     <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} className="w-full h-full opacity-0 absolute cursor-pointer" />
                 </Box>
                 <Box className='mx-auto w-1/3 mt-10 max-sm:w-full'>
-                    <Button onClick={updateBanner} variant='outlined' className='!rounded-full w-full !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>
+                    <Button onClick={updateModel} variant='outlined' className='!rounded-full w-full !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>
                         {
                             sendWait ?
                                 <CircularProgress size={20} className="" color="white" />

@@ -20,6 +20,7 @@ import ClientsRoutes from './routes/ClientsRoutes';
 import OrdersRoutes from './routes/OrdersRoutes';
 import ProfileRoutes from './routes/ProfileRoutes';
 import TeamRoutes from './routes/TeamRoutes';
+import ModelsRoutes from './routes/ModelsRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -84,6 +85,11 @@ function App() {
               }
               {
                 TeamRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                ModelsRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }

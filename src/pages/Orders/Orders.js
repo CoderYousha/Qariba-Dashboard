@@ -124,9 +124,9 @@ function Orders() {
                                                             <StyledTableRow key={index} className="hover:bg-gray-200 duration-100 cursor-pointer">
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => {setOrder(order); setPopup('order_details', 'flex')}}>{order.id}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => {setUser(order.user); setPopup('user_details', 'flex')}}>{order.user.full_name}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.category.service === 'software_developer' ? <FormattedMessage id="software_developer" /> : order.category.service === 'digital_marketing' ? <FormattedMessage id="digital_marketing" /> : <FormattedMessage id="photography" />}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.category.category}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.sub_category.sub_category}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.service === 'software_developer' ? <FormattedMessage id="software_developer" /> : order.service === 'digital_marketing' ? <FormattedMessage id="digital_marketing" /> : <FormattedMessage id="photography" />}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.category}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.sub_category}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.created_at.split("T")[0]}</StyledTableCell>
                                                                 <StyledTableCell align="right">
                                                                     <Box className="!flex justify-center items-center">

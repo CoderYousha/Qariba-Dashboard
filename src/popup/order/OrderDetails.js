@@ -22,9 +22,9 @@ function OrderDetails({ onClickCancel, order }) {
     const resetValue = () => {
         setId(order.id);
         setDescription(order.description);
-        setService(order.category.service);
-        setCategory(order.category.category);
-        setSubCategory(order.sub_category.sub_category);
+        setService(order.service);
+        setCategory(order.category);
+        setSubCategory(order.sub_category);
     }
 
     useEffect(() => {

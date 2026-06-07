@@ -72,7 +72,7 @@ function Clients() {
                                                 <FormattedMessage id='add_client' />
                                             </Button>
                                         </Box>
-                                        <Box className='grid grid-cols-3 mt-10 max-sm:grid-cols-1'>
+                                        <Box className='grid grid-cols-3 gap-y-5 mt-10 max-sm:grid-cols-1'>
                                             {
                                                 clients.map((client, index) =>
                                                     <MediaCard

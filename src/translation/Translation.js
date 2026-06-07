@@ -142,6 +142,7 @@ function Translation() {
             update_model: "Update Model",
             delete_model_title: "Delete Model",
             delete_model_description: "Are you sure that you want delete this model?",
+            whatsapp: "Whatsapp",
         },
         ar: {
             procedures: "الإجراءات",
@@ -287,6 +288,7 @@ function Translation() {
             update_model: "تحديث العارضة",
             delete_model_title: "حذف العارضة",
             delete_model_description: "هل انت متأكد أنك ترغب بحذف هذه العارضة",
+            whatsapp: "واتساب",
         }
     };
 }

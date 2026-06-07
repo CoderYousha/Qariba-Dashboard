@@ -14,7 +14,7 @@ function Contacts() {
     const { language, host } = useConstants();
     const { wait } = useContext(AuthContext);
     const { getWait, setGetWait, sendWait, setSendWait } = useWaits();
-    const { facebook, setFacebook, tiktok, setTiktok, instagram, setInstagram, youtube, setYoutube } = useAddContact();
+    const { facebook, setFacebook, tiktok, setTiktok, instagram, setInstagram, youtube, setYoutube, email, setEmail, whatsapp, setWhatsapp } = useAddContact();
     const { openSnackBar, type, message, setSnackBar, setOpenSnackBar } = useSnackBar();
     const theme = useTheme();
 
@@ -26,6 +26,8 @@ function Contacts() {
             setTiktok(result.data.data.data.tiktok);
             setInstagram(result.data.data.data.instagram);
             setYoutube(result.data.data.data.youtube);
+            setEmail(result.data.data.data.email);
+            setWhatsapp(result.data.data.data.whatsapp);
         }
 
         setGetWait(false);
@@ -76,6 +78,8 @@ function Contacts() {
                                             <TextField variant="outlined" className="w-full !mt-5" value={instagram} onChange={(e) => setInstagram(e.target.value)} label={<FormattedMessage id="instagram" />} />
                                             <TextField variant="outlined" className="w-full !mt-5" value={tiktok} onChange={(e) => setTiktok(e.target.value)} label={<FormattedMessage id="tiktok" />} />
                                             <TextField variant="outlined" className="w-full !mt-5" value={youtube} onChange={(e) => setYoutube(e.target.value)} label={<FormattedMessage id="youtube" />} />
+                                            <TextField variant="outlined" className="w-full !mt-5" value={email} onChange={(e) => setEmail(e.target.value)} label={<FormattedMessage id="email" />} />
+                                            <TextField variant="outlined" className="w-full !mt-5" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} label={<FormattedMessage id="whatsapp" />} />
                                             <Box className='w-fit mx-auto mt-5'>
                                                 <Button onClick={updateContact} className="w-60" variant="contained" color="success">
                                                     {

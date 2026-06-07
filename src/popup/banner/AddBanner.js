@@ -28,8 +28,8 @@ function AddBanner({ onClickCancel, setSnackBar, setBanners }) {
         let result = await Fetch(`${host}/api/banners`, 'post', formData);
 
         if (result.status === 201) {
-            setSnackBar('success', <FormattedMessage id="added_success" />);
-            setBanners((prevBanners) => [result.data.data, ...prevBanners]);
+            setSnackBar('success', result.data.message);
+            setBanners((prevBanners) => [result.data.data.data, ...prevBanners]);
             onClickCancel();
         } else if (result.status === 422) {
             setSnackBar('error', result.data.errors[0]);

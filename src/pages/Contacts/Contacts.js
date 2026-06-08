@@ -41,6 +41,8 @@ function Contacts() {
             instagram: instagram,
             tiktok: tiktok,
             youtube: youtube,
+            email: email,
+            whatsapp: whatsapp,
         });
 
         let result = await Fetch(`${host}/api/contacts`, 'POST', formData);

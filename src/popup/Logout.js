@@ -15,7 +15,7 @@ function LogoutPopup({ onClickCancel}) {
     const logout = async () => {
         setSendWait(true);
 
-        let result = await Fetch(`${host}/logout`, 'POST');
+        let result = await Fetch(`${host}/api/logout`, 'POST');
 
         if(result.status === 200){
             localStorage.removeItem('token');

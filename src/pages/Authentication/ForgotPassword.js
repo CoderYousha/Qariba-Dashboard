@@ -120,7 +120,6 @@ function ForgotPassword() {
                                     />
                                 </Box>
                             </Box>
-
                         }
                         {
                             openResetPasswordSection &&

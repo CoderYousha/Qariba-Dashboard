@@ -143,6 +143,11 @@ function Translation() {
             delete_model_title: "Delete Model",
             delete_model_description: "Are you sure that you want delete this model?",
             whatsapp: "Whatsapp",
+            model: "Model",
+            status: "Status",
+            accepted: "Accepted",
+            pending: "Pending",
+            canceled: "Canceled",
         },
         ar: {
             procedures: "الإجراءات",
@@ -289,6 +294,11 @@ function Translation() {
             delete_model_title: "حذف العارضة",
             delete_model_description: "هل انت متأكد أنك ترغب بحذف هذه العارضة",
             whatsapp: "واتساب",
+            model: "عارضة",
+            status: "الحالة",
+            accepted: "الموافقة",
+            pending: "الانتظار",
+            canceled: "إلغاء",
         }
     };
 }

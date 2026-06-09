@@ -6,8 +6,9 @@ export function useOrder (){
     const [service, setService] = useState('');
     const [category, setCategory] = useState('');
     const [subCategory, setSubCategory] = useState('');
+    const [model, setModel] = useState('');
 
     return {id, setId, description, setDescription, service, setService, category, setCategory, subCategory,
-        setSubCategory,
+        setSubCategory, model, setModel
     };
 }

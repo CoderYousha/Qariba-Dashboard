@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, useTheme } from "@mui/material";
+import { Box, Button, CircularProgress, MenuItem, Paper, Select, Table, TableBody, TableContainer, TableHead, TableRow, Typography, useTheme } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useConstants } from "../../hooks/UseConstants";
@@ -21,6 +21,7 @@ import UpdateCategory from "../../popup/category/UpdateCategory";
 import { useNavigate } from "react-router-dom";
 import UserDetails from "../../popup/user/UserDetails";
 import OrderDetails from "../../popup/order/OrderDetails";
+import CircleIcon from '@mui/icons-material/Circle';
 
 function Orders() {
     const { language, host } = useConstants();
@@ -50,6 +51,19 @@ function Orders() {
         }
 
         setGetWait(false);
+    }
+
+    {/* Change Order Status Function */ }
+    const changeStatus = async (status, id) => {
+        const formData = new FormData();
+        formData.append('status', status);
+
+        let result = await Fetch(`${host}/api/requests/change-status/${id}`, 'POST', formData);
+
+        if (result.status === 200) {
+            setSnackBar('success', result.data.message);
+            getOrders();
+        }
     }
 
     {/* Delete Order Function */ }
@@ -90,7 +104,6 @@ function Orders() {
                                             <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='orders' /></Typography>
                                         </Box>
 
-
                                         <Box>
                                             <TableContainer className="" component={Paper} dir={language === 'en' ? 'ltr' : "rtl"}>
                                                 {/* Top Table */}
@@ -114,20 +127,39 @@ function Orders() {
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='client_name' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='service' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='category' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='model' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='sub_category' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='order_date' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='status' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? 'left' : 'right'} className="!text-center"><FormattedMessage id='procedures' /></StyledTableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
                                                         {orders.map((order, index) => (
                                                             <StyledTableRow key={index} className="hover:bg-gray-200 duration-100 cursor-pointer">
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => {setOrder(order); setPopup('order_details', 'flex')}}>{order.id}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => {setUser(order.user); setPopup('user_details', 'flex')}}>{order.user.full_name}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => { setOrder(order); setPopup('order_details', 'flex') }}>{order.id}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="" onClick={() => { setUser(order.user); setPopup('user_details', 'flex') }}>{order.user.full_name}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.service === 'software_developer' ? <FormattedMessage id="software_developer" /> : order.service === 'digital_marketing' ? <FormattedMessage id="digital_marketing" /> : <FormattedMessage id="photography" />}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.category}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.model}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.sub_category}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{order.created_at.split("T")[0]}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">
+                                                                    <Select onChange={(e) => changeStatus(e.target.value, order.id)} value={order.status} variant="standard" defaultValue="active" onClick={(e) => e.stopPropagation()} className="!border-0" sx={{ border: 'none' }}>
+                                                                        <MenuItem value="accepted">
+                                                                            <CircleIcon className="text-green-700" fontSize="small" /> <FormattedMessage id='accepted' />
+                                                                        </MenuItem>
+                                                                        <MenuItem value="pending">
+                                                                            <CircleIcon className="text-gray-700" fontSize="small" /> <FormattedMessage id='pending' />
+                                                                        </MenuItem>
+                                                                        <MenuItem value="canceled">
+                                                                            <CircleIcon className="text-red-700" fontSize="small" /> <FormattedMessage id='canceled' />
+                                                                        </MenuItem>
+                                                                        <MenuItem value="contact_us">
+                                                                            <CircleIcon className="text-orange-500" fontSize="small" /> <FormattedMessage id='contact_us' />
+                                                                        </MenuItem>
+                                                                    </Select>
+                                                                </StyledTableCell>
                                                                 <StyledTableCell align="right">
                                                                     <Box className="!flex justify-center items-center">
                                                                         <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300 !ml-2" onClick={(e) => { setOrder(order); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
@@ -137,6 +169,16 @@ function Orders() {
                                                         ))}
                                                     </TableBody>
                                                 </Table>
+                                                {/* Pagination Buttons */}
+                                                <Box className="flex justify-center items-center" dir="rtl">
+                                                    <Button disabled={page + 1 === totalPages} className="cursor-pointer" onClick={() => setPage(currentPage + 1)}>
+                                                        <NavigateNextIcon fontSize="large" />
+                                                    </Button>
+                                                    <Typography variant="body1" className="!text-xl" dir='ltr'>{currentPage + 1} / {totalPages}</Typography>
+                                                    <Button disabled={page + 1 === 1} className="cursor-pointer" onClick={() => setPage(currentPage - 1)}>
+                                                        <NavigateBeforeIcon fontSize="large" />
+                                                    </Button>
+                                                </Box>
                                             </TableContainer>
                                         </Box>
                                     </Box>

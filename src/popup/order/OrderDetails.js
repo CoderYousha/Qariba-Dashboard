@@ -16,7 +16,7 @@ function OrderDetails({ onClickCancel, order }) {
     const theme = useTheme();
     const { host, language } = useConstants();
     const { sendWait, setSendWait } = useWaits();
-    const {id, setId, description, setDescription, service, setService, category, setCategory, subCategory, setSubCategory} = useOrder();
+    const {id, setId, description, setDescription, service, setService, category, setCategory, subCategory, setSubCategory, model, setModel} = useOrder();
     const intl = useIntl();
     
     const resetValue = () => {
@@ -25,6 +25,7 @@ function OrderDetails({ onClickCancel, order }) {
         setService(order.service);
         setCategory(order.category);
         setSubCategory(order.sub_category);
+        setModel(order.model);
     }
 
     useEffect(() => {
@@ -33,7 +34,7 @@ function OrderDetails({ onClickCancel, order }) {
     }, [order]);
 
     return (
-        <Box sx={{ backgroundColor: theme.palette.background.paper }} className="shadow-lg w-3/5 h-fit rounded-3xl px-4 py-5 overflow-y-scroll none-view-scroll max-sm:w-4/5 max-sm:translate-x-0 max-sm:left-0 relative max-sm:overflow-y-scroll" dir={language === 'en' ? 'ltr' : "rtl"}>
+        <Box sx={{ backgroundColor: theme.palette.background.paper }} className="shadow-lg w-3/5 h-screen rounded-3xl px-4 py-5 overflow-y-scroll none-view-scroll max-sm:w-4/5 max-sm:translate-x-0 max-sm:left-0 relative max-sm:overflow-y-scroll" dir={language === 'en' ? 'ltr' : "rtl"}>
             <Typography variant="h5" className="!font-semibold max-sm:!text-xl">
                 <FormattedMessage id='order_details' />
             </Typography>
@@ -54,6 +55,9 @@ function OrderDetails({ onClickCancel, order }) {
                 </Box>
                 <Box className='flex flex-col justify-between mt-16 max-sm:flex-col'>
                     <TextField variant="outlined" label={<FormattedMessage id="sub_category" />} className="w-full max-sm:w-full" value={subCategory} />
+                </Box>
+                <Box className='flex flex-col justify-between mt-16 max-sm:flex-col'>
+                    <TextField variant="outlined" label={<FormattedMessage id="model" />} className="w-full max-sm:w-full" value={model} />
                 </Box>
             </Box>
         </Box>
